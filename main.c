@@ -163,7 +163,22 @@ void eliminarItem(Map *jugadores){
   return;
 }
 
-void agregarPH(Map *jugadores) {}
+void agregarPH(Map *jugadores) {
+  char nombre[101];
+  puts("\nIngrese el nombre del jugador:");
+  scanf("%s[^\n]", nombre);
+  getchar();
+  jugador *aux = searchMap(jugadores, nombre);
+  if (aux == NULL){
+    puts("El jugador no se encuentra registrado.\n");
+    return;
+  }
+  int ptsH;
+  puts("\nIngrese cuantos puntos de habilidad desea ingresar");
+  scanf("%i", &ptsH);
+  aux->ph += ptsH;
+  return;
+}
 
 void mostrarItemEspecifico(Map *jugadores) {}
 
