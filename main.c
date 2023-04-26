@@ -63,7 +63,7 @@ void menuTexto(int *opcion) {
 void crearPerfil(Map *jugadores) {
 
   jugador *aux = (jugador *)malloc(sizeof(jugador));
-  char nombre[50];
+  char nombre[101];
   puts("\nIngrese el nombre del jugador:");
   scanf("%s[^\n]", nombre);
   getchar();
@@ -79,7 +79,7 @@ void crearPerfil(Map *jugadores) {
 } // LISTO
 
 void mostrarPerfil(Map *jugadores) {
-  char nombre[50];
+  char nombre[101];
   puts("\nIngrese el nombre del jugador:");
   scanf("%s[^\n]", nombre);
   getchar();
@@ -110,7 +110,7 @@ void mostrarPerfil(Map *jugadores) {
 } // LISTO
 
 void agregarItem(Map *jugadores) {
-  char item[50], nombre[50]; // usar array dinamico
+  char item[101], nombre[101]; // usar array dinamico
   char *itemD;
   puts("\nIngrese el nombre del jugador:");
   scanf("%s[^\n]", nombre);
@@ -120,17 +120,15 @@ void agregarItem(Map *jugadores) {
   if (aux == NULL) {
     puts("El jugador buscado no se encuentra registrado.\n");
     return;
-
-  } else {
-    puts("\nIngrese el nombre del item:");
-    scanf(" %[^\n]", item);
-    itemD = (char *)malloc(sizeof(char) * (strlen(item) + 1));
-    strcpy(itemD, item);
-    insertMap(aux->inventario, itemD, itemD);
-    aux->cantItems++; // aqui en teoria se agrega un item al mapa de inventario
-
-    stack_push(aux->accionJ, itemD); // se añade a la pila la ultima accion
   }
+  puts("\nIngrese el nombre del item:");
+  scanf("%[^\n]%*c", item);
+  itemD = (char *)malloc(sizeof(char) * (strlen(item) + 1));
+  strcpy(itemD, item);
+  insertMap(aux->inventario, itemD, itemD);
+  aux->cantItems++; // aqui en teoria se agrega un item al mapa de inventario
+
+  stack_push(aux->accionJ, itemD); // se añade a la pila la ultima accion
 
   // probando
   /*
