@@ -141,7 +141,7 @@ void eliminarItem(Map *jugadores){
   char item[101], nombre[101];
   
   puts("\nIngrese el nombre del jugador:");
-  scanf("%s[^\n]", nombre);
+  scanf("%s", nombre);
   getchar();
   jugador *aux = searchMap(jugadores, nombre);
   if (aux == NULL){
@@ -149,7 +149,8 @@ void eliminarItem(Map *jugadores){
     return;
   }
   puts("\nIngrese el nombre del item:");
-  scanf("%s[^\n]", item);
+  scanf(" %[^\n]", item);
+  getchar();
   void *itemAux = searchMap(aux->inventario, item);
   if (itemAux == NULL){
     puts("El item no se encuentra en el inventario del jugador.");
