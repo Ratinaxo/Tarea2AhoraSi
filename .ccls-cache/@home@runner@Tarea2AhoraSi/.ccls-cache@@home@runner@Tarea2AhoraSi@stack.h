@@ -1,5 +1,5 @@
-#ifndef Stack_h
-#define Stack_H
+#ifndef stack_h
+#define stack_h
 
 
 #include "list.h"

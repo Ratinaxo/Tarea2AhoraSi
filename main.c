@@ -146,7 +146,6 @@ void agregarItem(Map *jugadores) {
   accion->puntos = 0;
   accion->dato = itemD;
   stack_push(aux->accionJ, accion);
-  // probando
   
 } // LISTO
 
@@ -210,7 +209,6 @@ void agregarPH(Map *jugadores) {
   accion->dato = NULL;
   stack_push(aux->accionJ, accion);
 
-  //testeo
 } // LISTO
 
 void mostrarItemEspecifico(Map *jugadores) {
@@ -344,8 +342,6 @@ int main() {
       printf("\n--------------------------------------------\n");
       break;
     case 3:
-      // printf("¿Que item deasea agregar?"); // lo comento pq estoy probando lo
-      // de la pila para el deshacer :)
       printf("\n--------------------------------------------\n");
       agregarItem(jugadores);
       printf("\n--------------------------------------------\n");

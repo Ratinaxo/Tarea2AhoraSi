@@ -59,7 +59,7 @@ Puntaje trabajo en equipo en relación a los puntos anteriores.
 - 7 pts - Aceptable, hay que mejorar cosas mínimas.
 - 5 pts - A pesar de haber trabajado, se deben mejorar algunos aspectos.
 - 3 pts - Realizó el mínimo, cumplió con muy poco.
-- 1 pts - No complió con ninguna expectativa.
+- 1 pts - No cumplió con ninguna expectativa.
 - TOTAL: 40/40
 
 Felipe Bechan:
