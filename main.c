@@ -18,7 +18,7 @@ typedef struct {
   int cantItems;
   Map *inventario;
   Stack *accionJ;
-  //char ultimaAccion; 
+   
 } jugador;
 
 int is_equal_string(void *key1, void *key2) {
@@ -217,12 +217,23 @@ void mostrarItemEspecifico(Map *jugadores) {
   char item[101];
   
   printf("\nIngrese el nombre del item: ");
-  scanf("%[^\n]%*c", item);
-  
+  scanf(" %[^\n]", item);
+  getchar();
 
-
-  
-}
+  jugador *auxJ = firstMap(jugadores);
+  int existe = 0;
+  printf("\nJugadores que tienen este item en su inventario: \n");
+  while( auxJ != NULL )
+    {
+      if(searchMap(auxJ->inventario, item) != NULL)
+      {
+        existe = 1;
+        printf("- %s\n", auxJ->nombre);
+      }
+      auxJ = nextMap(jugadores);
+    }
+  if( existe == 0) printf("\n ** No se encontraron jugadores que contengan este item en su inventario **");
+} // Listo
 
 void deshacerUltima(Map *jugadores){
   
