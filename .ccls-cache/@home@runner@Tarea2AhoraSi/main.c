@@ -39,7 +39,6 @@ void menuTexto(int *opcion) {
   printf("9. Exportar datos a un archivo CSV.\n");
   // en proceso
   printf("0. Salir del menu.\n");
-
   /*
     Usar string para comprobar que lo ingresa el usuario es un numero valido
     para nuestro menu
@@ -64,7 +63,7 @@ void crearPerfil(Map *jugadores) {
 
   jugador *aux = (jugador *)malloc(sizeof(jugador));
   char nombre[101];
-  puts("\nIngrese el nombre del jugador:");
+  printf("\nIngrese el nombre del jugador: ");
   scanf("%s[^\n]", nombre);
   getchar();
 
@@ -80,19 +79,19 @@ void crearPerfil(Map *jugadores) {
 
 void mostrarPerfil(Map *jugadores) {
   char nombre[101];
-  puts("\nIngrese el nombre del jugador:");
+  printf("\nIngrese el nombre del jugador: ");
   scanf("%s[^\n]", nombre);
   getchar();
   jugador *info = searchMap(jugadores, nombre);
 
   if (info == NULL) {
-    printf("El jugador no se encuentra registrado");
+    printf("\nEl jugador no se encuentra registrado\n");
     return;
   }
 
-  printf("Nombre: %s\n", info->nombre);
+  printf("\nNombre: %s\n", info->nombre);
   printf("Puntos de Habilidad: %i\n", info->ph);
-  printf("\n***Items de %s***\n", info->nombre);
+  printf("\n****Items de %s****\n", info->nombre);
 
   Map *invJugador = info->inventario;
   char *item =
@@ -106,13 +105,13 @@ void mostrarPerfil(Map *jugadores) {
     printf("- %s\n", item); // pero me muestra el nombre del jugador ....
     item = nextMap(invJugador);
   }
-  printf("\n*****************\n");
+  printf("\n******************\n");
 } // LISTO
 
 void agregarItem(Map *jugadores) {
   char item[101], nombre[101]; // usar array dinamico
   char *itemD;
-  puts("\nIngrese el nombre del jugador:");
+  printf("\nIngrese el nombre del jugador: ");
   scanf("%s[^\n]", nombre);
   getchar();
   jugador *aux = searchMap(jugadores, nombre);
@@ -121,7 +120,7 @@ void agregarItem(Map *jugadores) {
     puts("El jugador buscado no se encuentra registrado.\n");
     return;
   }
-  puts("\nIngrese el nombre del item:");
+  printf("\nIngrese el nombre del item: ");
   scanf("%[^\n]%*c", item);
   itemD = (char *)malloc(sizeof(char) * (strlen(item) + 1));
   strcpy(itemD, item);
@@ -140,7 +139,7 @@ void agregarItem(Map *jugadores) {
 void eliminarItem(Map *jugadores){
   char item[101], nombre[101];
   
-  puts("\nIngrese el nombre del jugador:");
+  printf("\nIngrese el nombre del jugador: ");
   scanf("%s", nombre);
   getchar();
   jugador *aux = searchMap(jugadores, nombre);
@@ -148,7 +147,7 @@ void eliminarItem(Map *jugadores){
     puts("El jugador no se encuentra registrado.\n");
     return;
   }
-  puts("\nIngrese el nombre del item:");
+  printf("\nIngrese el nombre del item: ");
   scanf(" %[^\n]", item);
   getchar();
   void *itemAux = searchMap(aux->inventario, item);
@@ -164,7 +163,7 @@ void eliminarItem(Map *jugadores){
 
 void agregarPH(Map *jugadores) {
   char nombre[101];
-  puts("\nIngrese el nombre del jugador:");
+  printf("\nIngrese el nombre del jugador: ");
   scanf("%s[^\n]", nombre);
   getchar();
   jugador *aux = searchMap(jugadores, nombre);
@@ -173,7 +172,7 @@ void agregarPH(Map *jugadores) {
     return;
   }
   int ptsH;
-  puts("\nIngrese cuantos puntos de habilidad desea ingresar");
+  printf("\nIngrese cuantos puntos de habilidad desea ingresar: ");
   scanf("%i", &ptsH);
   aux->ph += ptsH;
   return;
@@ -240,39 +239,56 @@ int main() {
 
   printf("~~~~~~BIENVENIDO AL MENU DE JUGADOR~~~~~~\n\n");
   while (1) {
-
     menuTexto(&opcion);
 
     switch (opcion) {
     case 1:
+      printf("\n--------------------------------------------\n");
       crearPerfil(jugadores);
+      printf("\n--------------------------------------------\n");
+
       break;
     case 2:
+      printf("\n--------------------------------------------\n");
       mostrarPerfil(jugadores);
+      printf("\n--------------------------------------------\n");
       break;
     case 3:
       // printf("¿Que item deasea agregar?"); // lo comento pq estoy probando lo
       // de la pila para el deshacer :)
+      printf("\n--------------------------------------------\n");
       agregarItem(jugadores);
+      printf("\n--------------------------------------------\n");
       break;
     case 4:
-
+      printf("\n--------------------------------------------\n");
       eliminarItem(jugadores);
+      printf("\n--------------------------------------------\n");
       break;
     case 5:
+      printf("\n--------------------------------------------\n");
       agregarPH(jugadores);
+      printf("\n--------------------------------------------\n");
       break;
     case 6:
+      printf("\n--------------------------------------------\n");
       mostrarItemEspecifico(jugadores);
+      printf("\n--------------------------------------------\n");
       break;
     case 7:
+      printf("\n--------------------------------------------\n");
       deshacerUltima(jugadores);
+      printf("\n--------------------------------------------\n");
       break;
     case 8:
+      printf("\n--------------------------------------------\n");
       importarArchivo(jugadores);
+      printf("\n--------------------------------------------\n");
       break;
     case 9:
+      printf("\n--------------------------------------------\n");
       exportarArchivo(jugadores);
+      printf("\n--------------------------------------------\n");
       break;
     case 0:
 
