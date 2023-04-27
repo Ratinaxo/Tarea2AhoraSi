@@ -17,6 +17,8 @@ typedef struct {
   int cantItems;
   Map *inventario;
   Stack *accionJ;
+  char ultimaAccion;
+
 } jugador;
 
 int is_equal_string(void *key1, void *key2) {
@@ -68,9 +70,12 @@ void crearPerfil(Map *jugadores) {
   getchar();
 
   aux->nombre = (char *)malloc(sizeof(char) * (strlen(nombre) + 1));
+  if(aux->nombre == NULL) exit(EXIT_FAILURE);
+  
   strcpy(aux->nombre, nombre);
   aux->cantItems = 0;
   aux->ph = 0;
+  aux->ultimaAccion = 'x';
   aux->inventario = createMap(is_equal_string);
   aux->accionJ = stack_create();
 
@@ -78,6 +83,7 @@ void crearPerfil(Map *jugadores) {
 } // LISTO
 
 void mostrarPerfil(Map *jugadores) {
+  
   char nombre[101];
   printf("\nIngrese el nombre del jugador: ");
   scanf("%s[^\n]", nombre);
@@ -94,22 +100,22 @@ void mostrarPerfil(Map *jugadores) {
   printf("\n****Items de %s****\n", info->nombre);
 
   Map *invJugador = info->inventario;
-  char *item =
-      (char *)firstMap(invJugador); // llamos l primer item que hay en el mapa
-                                    // de inventario del jugador
+  char *item = (char *)firstMap(invJugador); 
+  // llamamos al primer item que hay en el mapa de inventario del jugador
   if (item == NULL) {
     printf("El jugador no tiene items\n");
     return;
   }
+  
   while (item != NULL) {
-    printf("- %s\n", item); // pero me muestra el nombre del jugador ....
+    printf("- %s\n", item); 
     item = nextMap(invJugador);
   }
   printf("\n******************\n");
 } // LISTO
 
 void agregarItem(Map *jugadores) {
-  char item[101], nombre[101]; // usar array dinamico
+  char item[101], nombre[101]; 
   char *itemD;
   printf("\nIngrese el nombre del jugador: ");
   scanf("%s[^\n]", nombre);
@@ -128,25 +134,28 @@ void agregarItem(Map *jugadores) {
   aux->cantItems++; // aqui en teoria se agrega un item al mapa de inventario
 
   stack_push(aux->accionJ, itemD); // se añade a la pila la ultima accion
-
+  aux->ultimaAccion = 'a';
   // probando
-  /*
+  
   char *test = stack_top(aux->accionJ);
   printf("\nTEST : %s", test);
-  */
+  
 } // LISTO
 
 void eliminarItem(Map *jugadores){
+  
   char item[101], nombre[101];
   
   printf("\nIngrese el nombre del jugador: ");
   scanf("%s", nombre);
   getchar();
+  
   jugador *aux = searchMap(jugadores, nombre);
   if (aux == NULL){
     puts("El jugador no se encuentra registrado.\n");
     return;
   }
+  
   printf("\nIngrese el nombre del item: ");
   scanf(" %[^\n]", item);
   getchar();
@@ -155,33 +164,83 @@ void eliminarItem(Map *jugadores){
     puts("El item no se encuentra en el inventario del jugador.");
     return;
   }
+  
   eraseMap(aux->inventario, item);
   aux->cantItems--;
+  stack_push(aux->accionJ, item);
+  aux->ultimaAccion = 'e';
   printf("El item fue eliminado del inventario del jugador");
   return;
 }
 
 void agregarPH(Map *jugadores) {
+  
   char nombre[101];
   printf("\nIngrese el nombre del jugador: ");
   scanf("%s[^\n]", nombre);
   getchar();
   jugador *aux = searchMap(jugadores, nombre);
+  
   if (aux == NULL){
     puts("El jugador no se encuentra registrado.\n");
     return;
   }
+  
   int ptsH;
   printf("\nIngrese cuantos puntos de habilidad desea ingresar: ");
   scanf("%i", &ptsH);
   aux->ph += ptsH;
+  stack_push(aux->accionJ, &ptsH);
+  aux->ultimaAccion = 'p';
+
+  //testeo
+  int *test = stack_top(aux->accionJ);
+  printf("%i", *test);
   return;
 }
 
-void mostrarItemEspecifico(Map *jugadores) {}
+void mostrarItemEspecifico(Map *jugadores) {
+  
+}
 
-void deshacerUltima(Map *jugadores)
-{
+void deshacerUltima(Map *jugadores){
+  
+  char nombre[101];
+  printf("\nIngrese el nombre del jugador: ");
+  scanf("%s[^\n]", nombre);
+  getchar();
+  jugador *aux = searchMap(jugadores, nombre);
+  
+  if (aux == NULL){
+    puts("El jugador no se encuentra registrado.\n");
+    return;
+  }
+
+  switch(aux->ultimaAccion){
+    case 'a': //ultima accion fue agregar(a) item
+      char *last = stack_top(aux->accionJ);
+      eraseMap(aux->inventario, last);
+      aux->cantItems--;
+
+    break;
+    
+    case 'e': //ultima accion fue eliminar(e) item
+      char *last = stack_top(aux->accionJ);
+      insertMap(aux->inventario, last, last);
+      aux->cantItems++;
+    break;
+    
+    case 'p': //ultima accion fue agregar puntos(p) de habilidad
+
+    break;
+    
+    case 'x': //no existe ultima accion realizada(x)
+      printf("\nEste jugador no tiene acciones realizadas %s\n",nombre);
+      return;
+    break;
+  }
+
+
   
 }
 
