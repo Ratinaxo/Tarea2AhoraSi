@@ -5,10 +5,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct{
-  char accion;  // 'a' para agregar item, 'e' para eliminar item, 'p' para agregar ph
-  int puntos;   // cantidad de puntos de habilidad agregados o eliminados
-  void *dato;   // item agregado o eliminado, o NULL si se agregaron puntos de habilidad
+typedef struct {
+  char accion; // 'a' para agregar item, 'e' para eliminar item, 'p' para
+               // agregar ph
+  int puntos;  // cantidad de puntos de habilidad agregados o eliminados
+  void *dato;  // item agregado o eliminado, o NULL si se agregaron puntos de
+               // habilidad
 } Accion;
 
 typedef struct {
@@ -18,7 +20,7 @@ typedef struct {
   int cantItems;
   Map *inventario;
   Stack *accionJ;
-   
+
 } jugador;
 
 int is_equal_string(void *key1, void *key2) {
@@ -27,9 +29,10 @@ int is_equal_string(void *key1, void *key2) {
   return 0;
 }
 
-int lower_than_string(void * key1, void * key2) {
-    if(strcmp((char*)key1, (char*)key2) < 0) return 1;
-    return 0;
+int lower_than_string(void *key1, void *key2) {
+  if (strcmp((char *)key1, (char *)key2) < 0)
+    return 1;
+  return 0;
 }
 
 void menuTexto(int *opcion) {
@@ -75,8 +78,9 @@ void crearPerfil(Map *jugadores) {
   getchar();
 
   aux->nombre = (char *)malloc(sizeof(char) * (strlen(nombre) + 1));
-  if(aux->nombre == NULL) exit(EXIT_FAILURE);
-  
+  if (aux->nombre == NULL)
+    exit(EXIT_FAILURE);
+
   strcpy(aux->nombre, nombre);
   aux->cantItems = 0;
   aux->ph = 0;
@@ -87,7 +91,7 @@ void crearPerfil(Map *jugadores) {
 } // LISTO
 
 void mostrarPerfil(Map *jugadores) {
-  
+
   char nombre[101];
   printf("\nIngrese el nombre del jugador: ");
   scanf("%s[^\n]", nombre);
@@ -103,27 +107,26 @@ void mostrarPerfil(Map *jugadores) {
   printf("Puntos de Habilidad: %i\n", info->ph);
   printf("\n****Items de %s****\n", info->nombre);
 
-  
   setSortFunction(info->inventario, lower_than_string);
   Map *invJugador = info->inventario;
-  //setSortFunction(info->inventario, lower_than_string); // intento de ordenar el mapa de items
+  // setSortFunction(info->inventario, lower_than_string); // intento de ordenar
+  // el mapa de items
 
-  
-  char *item = (char *)firstMap(invJugador); 
+  char *item = (char *)firstMap(invJugador);
   // llamamos al primer item que hay en el mapa de inventario del jugador
   if (item == NULL) {
     printf("El jugador no tiene items\n");
     return;
   }
   while (item != NULL) {
-    printf("- %s\n", item); 
+    printf("- %s\n", item);
     item = nextMap(invJugador);
   }
   printf("\n******************\n");
 } // LISTO
 
 void agregarItem(Map *jugadores) {
-  char item[101], nombre[101]; 
+  char item[101], nombre[101];
   char *itemD;
   printf("\nIngrese el nombre del jugador: ");
   scanf("%s[^\n]", nombre);
@@ -146,63 +149,63 @@ void agregarItem(Map *jugadores) {
   accion->puntos = 0;
   accion->dato = itemD;
   stack_push(aux->accionJ, accion);
-  
+
 } // LISTO
 
-void eliminarItem(Map *jugadores){
-  
+void eliminarItem(Map *jugadores) {
+
   char item[101], nombre[101];
-  
+
   printf("\nIngrese el nombre del jugador: ");
   scanf("%s", nombre);
   getchar();
-  
+
   jugador *aux = searchMap(jugadores, nombre);
-  if (aux == NULL){
+  if (aux == NULL) {
     puts("El jugador no se encuentra registrado.\n");
     return;
   }
-  
+
   printf("\nIngrese el nombre del item: ");
   scanf(" %[^\n]", item);
   getchar();
   void *itemAux = searchMap(aux->inventario, item);
-  if (itemAux == NULL){
+  if (itemAux == NULL) {
     puts("El item no se encuentra en el inventario del jugador.");
     return;
   }
-  
+
   eraseMap(aux->inventario, item);
   aux->cantItems--;
-  
+
   Accion *accion = (Accion *)malloc(sizeof(Accion));
   accion->accion = 'e';
   accion->puntos = 0;
   accion->dato = item;
   stack_push(aux->accionJ, accion);
-  
+
   printf("El item fue eliminado del inventario del jugador");
 } // LISTO
 
 void agregarPH(Map *jugadores) {
-  
+
   char nombre[101];
   printf("\nIngrese el nombre del jugador: ");
   scanf("%s[^\n]", nombre);
   getchar();
   jugador *aux = searchMap(jugadores, nombre);
-  
-  if (aux == NULL){
+
+  if (aux == NULL) {
     puts("El jugador no se encuentra registrado.\n");
     return;
   }
-  
+
   int ptsH;
   printf("\nIngrese cuantos puntos de habilidad desea ingresar: ");
   scanf("%i", &ptsH);
   aux->ph += ptsH;
   stack_push(aux->accionJ, &ptsH);
-  
+
   Accion *accion = (Accion *)malloc(sizeof(Accion));
   accion->accion = 'p';
   accion->puntos = ptsH;
@@ -213,7 +216,7 @@ void agregarPH(Map *jugadores) {
 
 void mostrarItemEspecifico(Map *jugadores) {
   char item[101];
-  
+
   printf("\nIngrese el nombre del item: ");
   scanf(" %[^\n]", item);
   getchar();
@@ -221,105 +224,140 @@ void mostrarItemEspecifico(Map *jugadores) {
   jugador *auxJ = firstMap(jugadores);
   int existe = 0;
   printf("\nJugadores que tienen este item en su inventario: \n");
-  while( auxJ != NULL )
-    {
-      if(searchMap(auxJ->inventario, item) != NULL)
-      {
-        existe = 1;
-        printf("- %s\n", auxJ->nombre);
-      }
-      auxJ = nextMap(jugadores);
+  while (auxJ != NULL) {
+    if (searchMap(auxJ->inventario, item) != NULL) {
+      existe = 1;
+      printf("- %s\n", auxJ->nombre);
     }
-  if( existe == 0) printf("\n ** No se encontraron jugadores que contengan este item en su inventario **");
+    auxJ = nextMap(jugadores);
+  }
+  if (existe == 0)
+    printf("\n ** No se encontraron jugadores que contengan este item en su "
+           "inventario **");
 } // Listo
 
-void deshacerUltima(Map *jugadores){
-  
+void deshacerUltima(Map *jugadores) {
+
   char nombre[101];
   printf("\nIngrese el nombre del jugador: ");
   scanf("%s[^\n]", nombre);
   getchar();
   jugador *aux = searchMap(jugadores, nombre);
-  
-  if (aux == NULL){
+
+  if (aux == NULL) {
     puts("El jugador no se encuentra registrado.\n");
     return;
   }
 
-  Accion *accion = (Accion *)stack_top(aux->accionJ); // tiraba un error por estar declarando last dentro de los casos de switch
-  
-  switch(accion->accion){
-    case 'a': //ultima accion fue agregar(a) item
-      eraseMap(aux->inventario, accion->dato); // eliminar item
-      aux->cantItems--;
-      stack_pop(aux->accionJ); // se elimina la ultima accion que se realizo de la pila
+  Accion *accion =
+      (Accion *)stack_top(aux->accionJ); // tiraba un error por estar declarando
+                                         // last dentro de los casos de switch
+
+  switch (accion->accion) {
+  case 'a': // ultima accion fue agregar(a) item
+    eraseMap(aux->inventario, accion->dato); // eliminar item
+    aux->cantItems--;
+    stack_pop(
+        aux->accionJ); // se elimina la ultima accion que se realizo de la pila
     break;
-    
-    case 'e': //ultima accion fue eliminar(e) item
-      insertMap(aux->inventario, accion->dato, accion->dato); // agregar item
-      aux->cantItems++;
-      stack_pop(aux->accionJ); // se elimina la ultima accion que se realizo de la pila
+
+  case 'e': // ultima accion fue eliminar(e) item
+    insertMap(aux->inventario, accion->dato, accion->dato); // agregar item
+    aux->cantItems++;
+    stack_pop(
+        aux->accionJ); // se elimina la ultima accion que se realizo de la pila
     break;
-    
-    case 'p': //ultima accion fue agregar puntos(p) de habilidad
-      aux->ph -= accion->puntos; // quitar puntos
-      stack_pop(aux->accionJ); // se elimina la ultima accion que se realizo de la pila
+
+  case 'p': // ultima accion fue agregar puntos(p) de habilidad
+    aux->ph -= accion->puntos; // quitar puntos
+    stack_pop(
+        aux->accionJ); // se elimina la ultima accion que se realizo de la pila
     break;
-    
-    case 'x': //no existe ultima accion realizada(x)
-      printf("\nEste jugador no tiene acciones realizadas %s\n",nombre);
-      return;
+
+  case 'x': // no existe ultima accion realizada(x)
+    printf("\nEste jugador no tiene acciones realizadas %s\n", nombre);
+    return;
     break;
   }
-} // LISTO 
+} // LISTO
 
 void importarArchivo(Map *jugadores) {
-  /*char archivo[100];
-  printf("Ingrese el nombre del archivo CSV:\n");
-  scanf("%s", archivo);
-  FILE *csv = fopen(archivo, "r");
+  char filename[100];
+  printf("Ingrese el nombre del archivo: ");
+  scanf("%s", filename);
 
-  if (csv == NULL){
-    printf("Error al leer archivo\n");
-    return;
-  }
-
-  char buffer[1024];
-
-  */
-} // en DESARROLLO
-
-void exportarArchivo(Map *jugadores) {
-  // ARREGLAR CASO DE MUCHOS ITEMS
-  // test.csv es de prueba, falta agregar lectura de nombre
-  FILE *fp = fopen("test.csv", "w");
+  FILE *fp = fopen(filename, "r");
   if (fp == NULL) {
-    printf("Error al abrir/crear archivo %s\n", "test.csv");
+    printf("Error al abrir el archivo\n");
     return;
   }
-  // encabezados/headers
-  fprintf(fp, "nombre,ph,item1,item2,item3\n");
 
-  void *key = firstMap(jugadores);
-  while (key != NULL) {
-    jugador *info = (jugador *)searchMap(jugadores, key);
+  char line[1024];
+  char *token;
+  while (fgets(line, 1024, fp)) {
+    jugador *j = (jugador *)malloc(sizeof(jugador));
+    char *linePtr = line;
 
-    fprintf(fp, "%s,%i,", info->nombre, info->ph);
+    // nombre
+    token = strsep(&linePtr, ",");
+    j->nombre = (char *)malloc(sizeof(char) * (strlen(token) + 1));
+    token[strcspn(token, "\r\n")] = 0;
+    strcpy(j->nombre, token);
 
-    Map *invJugador = info->inventario;
-    void *item = firstMap(invJugador);
-    while (item != NULL) {
-      fprintf(fp, "%s,", (char *)item);
-      item = nextMap(invJugador);
+    // puntos habilidad
+    token = strsep(&linePtr, ",");
+    j->ph = atoi(token);
+
+    // n itmes
+    token = strsep(&linePtr, ",");
+    int numItems = atoi(token);
+    j->cantItems = numItems;
+
+    // agregar items
+    j->inventario = createMap(is_equal_string);
+    for (int i = 0; i < numItems; i++) {
+      token = strsep(&linePtr, ",");
+      token[strcspn(token, "\r\n")] = 0;
+      char *item = (char *)malloc(sizeof(char) * (strlen(token) + 1));
+      strcpy(item, token);
+      insertMap(j->inventario, item, item);
     }
 
-    fprintf(fp, "\n");
-
-    key = nextMap(jugadores);
+    insertMap(jugadores, j->nombre, j);
   }
-  printf("Se ha exportado correctamente\n\n");
   fclose(fp);
-} // en DESARROLLO
+}
+
+void exportarArchivo(Map *jugadores) {
+  char filename[256];
+  printf("Ingrese el nombre del archivo: ");
+  scanf("%255s", filename);
+
+  FILE *archivo = fopen(filename, "w");
+  if (archivo == NULL) {
+    printf("Error al abrir el archivo para escritura.\n");
+    return;
+  }
+  fprintf(archivo, "Nombre,Puntos de habilidad,#items,Item 1,Item 2,Item "
+                   "3,Item 4,Item 5,Item 6,Item 7,Item 8\n");
+
+  void *jugador_actual = firstMap(jugadores);
+  while (jugador_actual != NULL) {
+    jugador *info = (jugador *)jugador_actual;
+    fprintf(archivo, "%s,%d,%d", info->nombre, info->ph, info->cantItems);
+    Map *invJugador = info->inventario;
+    void *item_actual = firstMap(invJugador);
+    int i;
+    for (i = 0; i < info->cantItems; i++) {
+      char *nombre_item = (char *)item_actual;
+      fprintf(archivo, ",%s", nombre_item);
+      item_actual = nextMap(invJugador);
+    }
+    fprintf(archivo, "\n");
+    jugador_actual = nextMap(jugadores);
+  }
+  fclose(archivo);
+}
 
 int main() {
   int opcion;
