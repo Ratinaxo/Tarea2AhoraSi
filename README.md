@@ -121,19 +121,23 @@ José Villamayor:
 Para compilar el programa se deberá seguir los siguientes pasos:
 
 -1. Ir al repositorio de github y copiar el link HTTPS.
+
 ![image](image.png)
 
 -2. Ir a replit.com y crear un nuevo repl y selección la opción de importar desde github.
 
 -3. Pegar el link anteriormente(1) copiado y seleccionar nuevamente la opción de importar(2).
+
 ![image](image_2.png)
 
--4. Esperar a que el archivo se importe (Puede demorarse un poco)-
+-4. Esperar a que el archivo se importe (Puede demorarse un poco).
 
 -5. Hacer click en 'RUN' en la parte superior de la pantalla.
+
 ![image](image_3.png)
 
 -6. Se le abrirá una consola, ya puede utilizar el programa.
+
 ![image](image_4.png)
 
 ## Autores
