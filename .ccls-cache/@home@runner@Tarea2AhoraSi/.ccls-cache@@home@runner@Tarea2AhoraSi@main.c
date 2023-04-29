@@ -146,7 +146,6 @@ void agregarItem(Map *jugadores) {
   accion->puntos = 0;
   accion->dato = itemD;
   stack_push(aux->accionJ, accion);
-
 }
 
 void eliminarItem(Map *jugadores) {
@@ -208,7 +207,6 @@ void agregarPH(Map *jugadores) {
   accion->puntos = ptsH;
   accion->dato = NULL;
   stack_push(aux->accionJ, accion);
-
 }
 
 void mostrarItemEspecifico(Map *jugadores) {
@@ -246,8 +244,7 @@ void deshacerUltima(Map *jugadores) {
     return;
   }
 
-  Accion *accion =
-      (Accion *)stack_top(aux->accionJ); 
+  Accion *accion = (Accion *)stack_top(aux->accionJ);
 
   switch (accion->accion) {
   case 'a': // ultima accion fue agregar(a) item
@@ -322,13 +319,15 @@ void importarArchivo(Map *jugadores) {
     insertMap(jugadores, j->nombre, j);
   }
   fclose(fp);
+  printf("\n******************************************\n");
+  printf("Se ha importado correctamente el archivo.\n");
+  printf("******************************************\n\n");
 }
 
 void exportarArchivo(Map *jugadores) {
   char filename[256];
-  printf("Ingrese el nombre del archivo: ");
+  printf("Ingrese el nombre del archivo (debe agregar extension .csv): ");
   scanf("%255s", filename);
-
   FILE *archivo = fopen(filename, "w");
   if (archivo == NULL) {
     printf("Error al abrir el archivo para escritura.\n");
@@ -353,7 +352,10 @@ void exportarArchivo(Map *jugadores) {
     jugador_actual = nextMap(jugadores);
   }
   fclose(archivo);
-} 
+  printf("\n******************************************\n");
+  printf("Se ha exportado correctamente el archivo.\n");
+  printf("******************************************\n\n");
+}
 
 int main() {
   int opcion;

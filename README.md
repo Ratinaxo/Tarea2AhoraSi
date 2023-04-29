@@ -56,21 +56,21 @@ Felipe Bechan:
 
 Ricardo Toro
 
-- Felipe Bechan[ + ] Gran desempeño, ordenado y con tiempo. Buena comunicación. Hizo todo a tiempo y de manera responsable.
+- Felipe Bechan[ + ] El trabajo realizado fue excelente, organizado y cumplido en el plazo establecido. La comunicación fue fluida y se mostró una actitud responsable en todo momento.
 - Ignacio Layana [ + ] Organizado, atento al trabajo y comunicativo.
 - José Villamayor [ ! ] Al principio del trabajo estaba algo ausente. En etapa media empezó a realizar sus respectivos trabajos y entregandolos sin problemas.
 
 
 Ignacio Layana: 
 
-- Felipe Bechan[ + ] Gran desempeño, ordenado y con tiempo. Buena comunicación. Hizo todo a tiempo y de manera responsable.
+- Felipe Bechan[ + ] Se destacó por un desempeño sobresaliente, manteniendo un alto nivel de orden y puntualidad en cada tarea. Además, la comunicación fue eficaz y se evidenció un enfoque responsable en todo momento.
 - José Villamayor[ + ] Buen Desarrollo del trabajo, comunicativo y resonsable en todo momento.
 - Ricardo Toro [ + ] Fue responsable en todos los aspectos del trabajo.
 
   
 José Villamayor: 
 
-- Felipe Bechan[ + ] Gran desempeño, ordenado y con tiempo. Buena comunicación. Hizo todo a tiempo y de manera responsable.
+- Felipe Bechan[ + ] El rendimiento fue impecable, se mostró una gran capacidad para la organización y el cumplimiento de los plazos establecidos. Asimismo, la comunicación fue clara y se demostró un compromiso responsable en todo momento.
 - Ignacio Layana [ + ] Organizado, atento al trabajo y comunicativo.
 - Ricardo Toro [ + ] Fue responsable en todos los aspectos del trabajo, faltó más comunicación con el resto del equipo
 
@@ -120,21 +120,21 @@ José Villamayor:
 
 Para compilar el programa se deberá seguir los siguientes pasos:
 
--1. Descargar el archivo .zip
+-1. Ir al repositorio de github y copiar el link HTTPS.
+![image](image.png)
 
--2. Descomprimir en carpeta de preferencia
+-2. Ir a replit.com y crear un nuevo repl y selección la opción de importar desde github.
 
--3. Hacer click derecho + shift en la carpeta y abrir “PowerShell”
+-3. Pegar el link anteriormente(1) copiado y seleccionar nuevamente la opción de importar(2).
+![image](image_2.png)
 
--4. Escribir el siguiente comando para compilar un .exe
-```bash
-    gcc *.c -o ejecutable.exe
-```
-Escribir el siguiente comando para correr el .exe generado
-```bash
-    ejecutable.exe
-```
+-4. Esperar a que el archivo se importe (Puede demorarse un poco)-
 
+-5. Hacer click en 'RUN' en la parte superior de la pantalla.
+![image](image_3.png)
+
+-6. Se le abrirá una consola, ya puede utilizar el programa.
+![image](image_4.png)
 
 ## Autores
 -Grupo Programines
@@ -142,4 +142,4 @@ Escribir el siguiente comando para correr el .exe generado
 - [@FELIPEBECHAN](https://github.com/felipebechan)
 - [@IGNACIOLAYANA](https://github.com/HatziveIgnacio)
 - [@RICARDO TORO](https://github.com/Ratinaxo)
-- [@JOSEVILLAMAYOR](https://replit.com/@JOSEVILLAMAYOR)
+- [@JOSEVILLAMAYOR](https://github.com/jochevipe)
