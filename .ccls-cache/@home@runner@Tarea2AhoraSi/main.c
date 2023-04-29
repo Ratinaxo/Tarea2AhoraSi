@@ -47,7 +47,6 @@ void menuTexto(int *opcion) {
   printf("7. Deshacer última acción.\n");
   printf("8. Importar datos desde un archivo CSV.\n");
   printf("9. Exportar datos a un archivo CSV.\n");
-  // en proceso
   printf("0. Salir del menu.\n");
   /*
     Usar string para comprobar que lo ingresa el usuario es un numero valido
@@ -67,7 +66,7 @@ void menuTexto(int *opcion) {
     }
     printf("Entrada invalida, ingrese una opcion valida entre 0 y 9\n");
   }
-} // Importado de Tarea 1. LISTO
+} // Importado de Tarea
 
 void crearPerfil(Map *jugadores) {
 
@@ -88,7 +87,7 @@ void crearPerfil(Map *jugadores) {
   aux->accionJ = stack_create();
 
   insertMap(jugadores, aux->nombre, aux);
-} // LISTO
+}
 
 void mostrarPerfil(Map *jugadores) {
 
@@ -109,8 +108,6 @@ void mostrarPerfil(Map *jugadores) {
 
   setSortFunction(info->inventario, lower_than_string);
   Map *invJugador = info->inventario;
-  // setSortFunction(info->inventario, lower_than_string); // intento de ordenar
-  // el mapa de items
 
   char *item = (char *)firstMap(invJugador);
   // llamamos al primer item que hay en el mapa de inventario del jugador
@@ -123,7 +120,7 @@ void mostrarPerfil(Map *jugadores) {
     item = nextMap(invJugador);
   }
   printf("\n******************\n");
-} // LISTO
+}
 
 void agregarItem(Map *jugadores) {
   char item[101], nombre[101];
@@ -150,7 +147,7 @@ void agregarItem(Map *jugadores) {
   accion->dato = itemD;
   stack_push(aux->accionJ, accion);
 
-} // LISTO
+}
 
 void eliminarItem(Map *jugadores) {
 
@@ -185,7 +182,7 @@ void eliminarItem(Map *jugadores) {
   stack_push(aux->accionJ, accion);
 
   printf("El item fue eliminado del inventario del jugador");
-} // LISTO
+}
 
 void agregarPH(Map *jugadores) {
 
@@ -212,7 +209,7 @@ void agregarPH(Map *jugadores) {
   accion->dato = NULL;
   stack_push(aux->accionJ, accion);
 
-} // LISTO
+}
 
 void mostrarItemEspecifico(Map *jugadores) {
   char item[101];
@@ -234,7 +231,7 @@ void mostrarItemEspecifico(Map *jugadores) {
   if (existe == 0)
     printf("\n ** No se encontraron jugadores que contengan este item en su "
            "inventario **");
-} // Listo
+}
 
 void deshacerUltima(Map *jugadores) {
 
@@ -250,8 +247,7 @@ void deshacerUltima(Map *jugadores) {
   }
 
   Accion *accion =
-      (Accion *)stack_top(aux->accionJ); // tiraba un error por estar declarando
-                                         // last dentro de los casos de switch
+      (Accion *)stack_top(aux->accionJ); 
 
   switch (accion->accion) {
   case 'a': // ultima accion fue agregar(a) item
@@ -279,7 +275,7 @@ void deshacerUltima(Map *jugadores) {
     return;
     break;
   }
-} // LISTO
+}
 
 void importarArchivo(Map *jugadores) {
   char filename[100];
@@ -357,7 +353,7 @@ void exportarArchivo(Map *jugadores) {
     jugador_actual = nextMap(jugadores);
   }
   fclose(archivo);
-}
+} 
 
 int main() {
   int opcion;
