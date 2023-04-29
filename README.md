@@ -2,16 +2,16 @@
 
 El programa permite importar y exportar una lista de jugadores con sus respectivos inventarios desde un archivo CSV, para pluego poder crear, mostar o actualizar los perfiles de los jugadores mediante un menú de 10 opciones.
 
-1.- Crear un perfil
-2.- Mostrar un perfil
-3.- Agregar un item
-4.- Eliminar un item
-5.- Agregar puntos de habilidad
-6.- Mostrar a todos los jugadores con algún item en especifico
-7.- Deshacer última acción realizada en el perfil de un jugador
-8.- Importar datos desde un archivo CSV
-9.- Exportar datos desde un archivo CSV
-0.- Salir del menú y cerrar programa
+-1.- Crear un perfil
+-2.- Mostrar un perfil
+-3.- Agregar un item
+-4.- Eliminar un item
+-5.- Agregar puntos de habilidad
+-6.- Mostrar a todos los jugadores con algún item en especifico
+-7.- Deshacer última acción realizada en el perfil de un jugador
+-8.- Importar datos desde un archivo CSV
+-9.- Exportar datos desde un archivo CSV
+-0.- Salir del menú y cerrar programa
 
 ## Features
 Todas las funciones funcionan correctamente, sin embargo hay que tener algunas consideraciones.
